@@ -1,0 +1,22 @@
+@import '../base/globales';
+@import '../base/mixins';
+@import '../base/normalize';
+@import '../base/utilidades';
+@import '../base/variables';
+
+.errors {
+    align-self: center;
+    color: $redForte;
+}
+
+
+.alert {
+    color: $redForte;
+    width: 50%;
+    margin-top: 1rem;
+}
+
+
+.no-send {
+    display: none !important;
+}

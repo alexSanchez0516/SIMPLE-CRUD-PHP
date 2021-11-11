@@ -1,0 +1,34 @@
+@import '../base/globales';
+@import '../base/mixins';
+@import '../base/normalize';
+@import '../base/utilidades';
+@import '../base/variables';
+
+#form-admin {
+    align-self: center;
+    width: 95%;
+    align-items: center !important;
+
+    * {
+        background-color: transparent;
+    }
+
+   @include tablet {
+        width: 75% !important;
+   } 
+
+   .wrap-form-admin {
+       width: 95%;
+
+       @include tablet {
+           width: 55%;
+       }
+   } 
+
+   
+}
+
+#btn-return-create {
+    align-self: center;
+}
+

@@ -1,0 +1,85 @@
+@import '../../base/globales';
+@import '../../base/mixins';
+@import '../../base/utilidades';
+@import '../../base/variables';
+
+//Fix title-contact darkmode
+.titleContact {
+    color: $white !important;
+}
+
+//Fix pol darkmode
+.changeColourPol {
+    color: $white !important;
+}
+
+//Fix placeholder forContact DarkMode
+.formContactFix {
+
+
+    * {
+        &:placeholder-shown {
+            color:$white !important;
+        }
+    }
+
+    
+}
+
+
+.wrap-contact {
+    font-family: Poppins;
+
+    .wrap-for {
+        display: flex;
+        flex-flow: column wrap;
+        align-self: center;
+        //background: $purpleContact;
+        width: 100%;
+        @include tablet {
+            width: 75%;
+        }
+        padding: 2rem;
+        //border: 5px solid $blueContact !important;
+
+
+
+        .title-contact {
+            font-weight: bolder;
+            letter-spacing: 3px;
+            color: black;
+        }
+
+        .subtitle-contact {
+            color: $redForte;
+        }
+    
+        
+    
+        .form-contact {
+    
+            * {
+                font-family: Poppins;
+                background: transparent;
+                border: none;
+                border-bottom: 2.5px solid $borderInput;
+                margin: .7rem 0 1rem 0;
+
+                &:placeholder-shown {
+                    color: $black;
+                }
+            }
+
+            .pol {
+                border: none ;
+            }
+            
+        } 
+    }
+
+}
+
+#polict {
+    margin: 1rem;
+}
+

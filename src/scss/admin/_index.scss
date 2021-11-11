@@ -1,0 +1,33 @@
+@import '../base/globales';
+@import '../base/mixins';
+@import '../base/normalize';
+@import '../base/utilidades';
+@import '../base/variables';
+
+
+.admin-table {
+
+    width: 90% !important;
+    margin-left: 1rem;    
+
+    @include phone {
+        display: table !important;
+
+    }
+    margin: 0 auto;
+    
+}
+
+
+.btn-table {
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+
+
+#addService {
+    align-self: center;
+    margin-bottom: 1rem;
+}
+

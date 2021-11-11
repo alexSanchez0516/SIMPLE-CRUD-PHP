@@ -1,0 +1,54 @@
+@import '../../base/globales';
+@import '../../base/mixins';
+@import '../../base/utilidades';
+@import '../../base/variables';
+
+
+.login-wrap {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    background-color: $whiteLogin;
+
+    .left {
+        align-items: center;
+    }
+
+    @include tablet {
+        flex-flow: row wrap;
+    }
+    
+    #img-banner {
+        display: none;
+    }
+
+    @include tablet {
+        #img-banner {
+            display: block;
+            height: 100vh;
+        }
+    }
+   
+
+}
+
+#img-login {
+    width: 120px;
+    align-self: center;
+    
+}
+
+#form-login {
+    align-self: center;
+    display: flex;
+    flex-flow: column wrap;
+    box-shadow: 3px 3px 3px 3px #ccc;
+    padding: 1rem;
+
+    * {
+        margin: 1rem 0 .5rem 0;
+    }
+
+
+
+}

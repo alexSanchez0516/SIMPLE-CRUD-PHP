@@ -1,0 +1,28 @@
+@import '../../base/variables';
+@import '../../base/mixins';
+
+
+.service-box-wrap {
+    width: 80%;
+
+
+    @include tablet {
+        width: 50%;
+    }
+
+    align-self: center;
+    display: flex;
+    flex-flow: column wrap;
+
+
+    .title-box-wrap {
+        letter-spacing: 3px;
+        color: #316ee2;
+    }
+
+    .sumary-box-product-wrap {
+        text-align: justify;
+        letter-spacing: 1px;
+    }
+
+}

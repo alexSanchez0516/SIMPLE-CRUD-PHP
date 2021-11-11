@@ -1,0 +1,55 @@
+
+@import '../../base/globales';
+@import '../../base/mixins';
+@import '../../base/utilidades';
+@import '../../base/variables';
+
+
+
+.content-present {
+    align-self: center;
+    margin: 2rem 0 0 0;
+
+    width: 90%;
+
+    @include tablet {
+        width: 75%;
+    }
+
+    .text-present_about {
+        letter-spacing: 3px;
+    }
+
+    p {
+        text-align: left;
+        @include phone {
+            text-align: justify;
+        }
+        margin: 2rem;
+        letter-spacing: 3px;
+    }
+}
+
+
+.content-picture-about {
+    padding: 4rem;
+    display: flex;
+    justify-content: center;
+    flex-flow: column wrap;
+    align-items: center;
+
+    @include tablet {
+        flex-flow: row wrap;
+    }
+
+    * {
+        font-size: 4rem;
+        margin: 1rem;
+    }
+}
+
+
+//Icons dev fixed
+.iconDevFix {
+    color: white !important;
+}

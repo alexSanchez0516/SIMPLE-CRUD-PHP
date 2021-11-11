@@ -1,0 +1,119 @@
+@import '../../base/variables';
+
+.packages {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    width: 100%;
+    margin-top: 1.5rem;
+
+    .title-packages {
+        color: $lightBlue;
+        font-size: 1rem;
+        letter-spacing: 3px;
+        font-weight: 600;
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 2rem;
+        margin-top: 4rem;
+        width: 90%;
+        
+        @include tablet {
+            width: 23%;
+        }
+    }
+
+    .content-pictures-packages {
+        display: flex;
+        flex-flow: row wrap;
+        width: 80%;
+        justify-content: space-evenly;
+    }
+
+    .content-pack {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center;
+
+        @include tablet {
+            flex-flow: row wrap;
+        }
+
+        width: 80%;
+        justify-content: center;
+
+        .package {
+            display: flex;
+            flex-flow: column wrap;
+            width: 80%;
+            
+            .img-packs {
+                align-self: center;
+            }
+            
+            @include tablet {
+                width: 30%;
+            }
+
+            .description.package {
+                text-align: justify !important;
+            }
+            
+            margin:1rem;
+
+            @include tablet {
+                margin: 2rem;
+            }
+            
+            align-items: flex-start;
+            
+            .title-package {
+                font-size: 1.6rem;
+                font-weight: bolder;
+                margin: 1.7rem 0 1rem 0;
+                color: $black;
+                text-align: center;
+            }
+            .pack {
+                &:first-of-type {
+                    margin-top: 1rem;
+                }
+                display: flex;
+                flex-flow: column wrap;
+                border: 1px solid #ccc;
+                padding: .5rem;
+                width: 100%;
+                margin-bottom: 1rem;
+
+                .content-service {
+                    display: flex;
+                    flex-flow: row wrap;
+                    justify-content: space-between;
+                    .title-pack {
+                        text-transform: uppercase;
+                        font-size: 1rem;
+                    }
+                }
+                .desc {
+                    display: flex;
+                    flex-flow: row wrap;
+
+                    * {
+                        margin: .5rem .5rem .5rem 0;
+                        font-size: .9rem;
+
+                    }   
+                }
+            }
+        }
+    }
+}
+
+.title-package_fix {
+    color: $black;
+    font-size: 1.6rem;
+    margin: 1.5rem 0 1.2rem 0;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    text-align: center;
+}

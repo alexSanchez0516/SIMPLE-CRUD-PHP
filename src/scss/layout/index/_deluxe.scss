@@ -1,0 +1,68 @@
+@import '../../base/variables';
+@import '../../base/mixins';
+
+//Fix gradient DarkMode
+.wrapServiceDeluxe {
+    background-image: linear-gradient(90deg,rgba(245, 246, 249, 0) 50%,#f5f6f929 0) !important;
+}
+
+
+.wrap-service-deluxe {
+
+    display: flex;
+    flex-flow: column-reverse;
+    background-image: linear-gradient(90deg,rgba(245,246,249,0) 50%,#f5f6f9 0%);
+    width: 100%;
+    * {
+        margin: .5rem;
+    }
+    @include tablet {
+        flex-flow:  row-reverse wrap;
+    }
+    img {
+        max-width: 100%;
+    }
+
+    margin-bottom: 5rem;
+    @include tablet {
+        margin-bottom: 10rem;
+    }
+
+    .content-deluxe {
+        flex:1 ;
+    }
+}
+
+.title-deluxe {
+    letter-spacing: 3px;
+    font-weight: 700;
+    font-size: .8rem;
+    text-transform: uppercase;
+
+}
+.name-service-deluxe {
+    font-weight: 700;
+    color: $black;
+}
+
+
+//wrap-website-seign-package
+
+.wrap-website-design-package {
+    width: 85%;
+    flex-flow: column wrap;
+
+    @include tablet {
+        img {
+            width: 50% !important;
+        }
+        div {
+            width: 25% !important;
+        }
+
+    }
+
+    @include tablet {
+        flex-flow: row wrap;
+    }
+}

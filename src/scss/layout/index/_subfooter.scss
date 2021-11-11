@@ -1,0 +1,89 @@
+@import '../../base/variables';
+@import '../../base/mixins';
+
+
+//Fix footer ChangeDarMode
+.footerChangeBanckground {
+    background-color: black !important;
+}
+
+
+.footer-content {
+    background-color: #007bff ;
+
+    .wrap-sub-footer {
+        //background-color: #007bff ;
+        display: flex;
+        flex-flow: column wrap;
+        width: 100%;
+        //align-items: center;
+        align-self: center;
+        padding: 1rem;
+    
+        
+        
+        .box-sub-footer {
+            flex:1;
+            align-items: center;
+    
+            &:nth-child(2n) {
+                span {
+                    margin-right: 4rem;
+                }
+            }
+    
+            &:nth-child(3n) {
+                @include desktop {
+                    margin-bottom: 7rem;
+                }
+            }
+    
+            .title-box-sub-foter {
+                display: block;
+                text-align: center;
+                margin:.2rem;
+                text-transform: uppercase;
+                color: $primary;
+                font-weight: 700;
+                letter-spacing: 3px;
+                color: #59ff9ad1;
+    
+            }
+            .content-box-sub-footer {
+                width: 45%;
+    
+    
+                color: $white;
+            }
+    
+            .list-page-legal-sub-footer {
+    
+                padding-right: 3rem;
+    
+                li {
+                    a {
+                        color: $white;
+                    }
+                }
+    
+            }
+    
+            
+            .list-services-sub-footer {
+                
+                
+                li {
+                    a {
+                        color: $white;
+                    }
+                }
+    
+            }
+    
+        }
+    
+        @include tablet {
+        flex-flow: row wrap;
+        }
+    }
+}

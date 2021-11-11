@@ -1,0 +1,42 @@
+.banner {
+    background-image: url(../../../../build/img/xbanner.webp);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    
+    .title-banner {
+        width: 60%;
+        font-size: 1.7rem;
+        margin: 2rem;
+        color: $red;
+        text-align: center;
+        @include tablet {
+            font-weight: bolder;
+        }
+        background: rgba(70, 69, 69, 0.34);
+        padding: .5rem;
+
+    }
+    .subtitle-banner {
+        margin: .5rem;
+        color: $red;
+        font-weight: bolder;
+    }
+    
+    .content-btn-banner {
+        display: flex;
+        flex-flow: row wrap;
+        width: 50%;
+        justify-content: center;
+        
+        button {
+            margin: 1rem;
+        }
+    }
+}
+

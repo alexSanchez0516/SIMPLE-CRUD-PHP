@@ -1,0 +1,54 @@
+@import 'base/normalize';
+@import 'base/variables';
+@import 'base/utilidades';
+@import 'base/mixins';
+@import 'base/globales';
+@import 'layout/index/navbar';
+@import 'layout/index/banner';
+@import 'layout/index/packages';
+@import 'layout/index/websites';
+@import 'layout/index/deluxe';
+@import 'layout/index/other_package';
+@import 'layout/index/contact_foot';
+@import 'layout/index/subfooter';
+@import 'layout/services/servicesPage';
+@import 'layout/services/servicePage';
+@import 'layout/contact/contact';
+@import 'layout/about/about';
+@import 'layout/product/product';
+@import 'admin/index.scss';
+@import 'admin/create';
+@import 'admin/alert';
+@import 'layout/login/login';
+
+
+
+.dark-md {
+    margin: 1rem !important;
+    background-color: black;
+    p,h1,h2,span,h3,a,li {
+        color: $white;
+    }
+    
+}
+
+ 
+
+.subtitle-what{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+
+    i {
+        color: $greenWhat;
+        font-size: 3rem;
+        margin:1rem;
+    }
+}
+
+.wrap {
+    font-family: $fuente_principal;
+    display: flex;
+    flex-flow: column wrap;
+}
+

@@ -1,0 +1,28 @@
+@import '../../base/variables';
+@import '../../base/mixins';
+
+
+.content-other-packages {
+    width: 95%;
+    @include tablet {
+        width: 80% !important;
+    }
+    margin: 0 auto;
+}
+
+.content-other {
+    margin: 1rem;
+    flex:1;
+
+    .text-packages {
+        text-align: justify;
+    }
+}
+
+.box-other {
+    display: flex;
+    flex-direction: column;
+    @include tablet {
+        flex-direction: row !important;
+    }
+}

@@ -1,0 +1,38 @@
+@import '../../base/variables';
+@import '../../base/mixins';
+
+.content-websites {
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.title-websites {
+    color: $primary;
+    text-align: center;
+    font-weight: bolder;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+}
+
+.img-box {
+    width: 50px;
+}
+
+
+.wrap-box {
+    width: 80%;
+    display: flex;
+    flex-flow: column ;
+
+    @include tablet {
+        flex-flow: row ;
+    }
+    .box {
+        margin:.5rem;
+        .content-text-box {
+            font-size: .95rem;
+        }
+        align-items: center;
+    }
+}
