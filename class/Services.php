@@ -45,18 +45,18 @@ class Services {
 
         $query = "SELECT id FROM services ORDER BY id DESC";
         $results = self::$db->query($query);
-        $id = null;  //Corregir
-        var_dump($id);
-        exit;
+        
+        $id = ($results->fetch_assoc());
+        $id = filter_var(intval($id['id']), FILTER_VALIDATE_INT) ? : header('Location: /');
 
         $services = self::$db->escape_string($_POST['services']);
         $listServices = explode(",", $services);
 
         foreach($listServices as $service) {
-            $query = "INSERT INTO service (serviceID, name) VALUES ($this->id, '${service}')";
-            echo $query;
+            $query = "INSERT INTO service (serviceID, name) VALUES ($id, '${service}')";
+            $data = self::$db->query($query);
         }
-        debug($listServices);
+        
     }
 
     //Identificamos cual tenemos
