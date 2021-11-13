@@ -1,1 +1,1 @@
-iiiprint("hol")
+print("hol")
