@@ -27,3 +27,8 @@ function debug($item) {
     exit;
 
 }
+
+function s($html) : string {
+    $s = htmlspecialchars($html);
+    return $s;
+}

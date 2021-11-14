@@ -1,19 +1,23 @@
 <?php
 
-require '../includes/funciones.php';
-require '../includes/config/db.php';
+require '../includes/app.php';
 
 
 isAuth();
 
 $db = connectDB();
 
+use App\Services;
+
+$services = Services::all();
 
 //Delete
 if(isset($_GET["deleteID"])) {
 
     $idDelete = filter_var(intval($_GET['deleteID']), FILTER_VALIDATE_INT ? : header('Location: /'));
     
+    Services::delete($idDelete);
+
     //Name photo 
     $query = "SELECT imageProduct FROM services WHERE id = ${idDelete}";
     $data = mysqli_query($db, $query);
@@ -74,21 +78,21 @@ includeTemplate('header');
         </thead>
 
         <tbody>
-            <?php while ( $service = mysqli_fetch_assoc($data) ): ?>
+            <?php foreach ( $services as $service): ?>
             <tr>
-                <th scope="row"><?php echo $service['id'] ?></th> <!-- ID -->
-                <td><?php echo $service['name'] ?></td>
-                <td><?php echo $service['description'] ?></td>
-                <td><?php echo $service['price'] ?>€</td>
+                <th scope="row"><?php echo $service->id; ?></th> <!-- ID -->
+                <td><?php echo $service->name; ?></td>
+                <td><?php echo $service->description; ?></td>
+                <td><?php echo $service->price; ?>€</td>
                 
-                <td> <img src="/admin/img/<?php echo $service['imageProduct']?>" class="img-fluid" style="height:45px;" ></td>
+                <td> <img src="/admin/img/<?php echo $service->imageProduct;?>" class="img-fluid" style="height:45px;" ></td>
 
 
-                <td class="bg-danger btn-table"><a href="/admin/?deleteID=<?php echo $service['id']?>">DELETE</a></td>
-                <td class="bg-danger btn-table"><a href="/admin/properties/update.php?updateID=<?php echo $service['id'] ?>">UPDATE</a></td>
+                <td class="bg-danger btn-table"><a href="/admin/?deleteID=<?php echo $service->id; ?>">DELETE</a></td>
+                <td class="bg-danger btn-table"><a href="/admin/properties/update.php?updateID=<?php echo $service->id; ?>">UPDATE</a></td>
 
             </tr>
-            <?php endwhile;  ?>
+            <?php endforeach;  ?>
 
         </tbody>
     </table>

@@ -33,7 +33,6 @@ if (empty($errors_file)) {
 
         
 
-
         //Escapa de sql injection 
         $title = mysqli_real_escape_string($db,  $_POST['title']);
         $description = mysqli_real_escape_string($db, $_POST['description']);
@@ -67,29 +66,8 @@ includeTemplate('header');
 
 
     <form action="" method="POST" id="form-admin" class="d-flex flex-column" enctype="multipart/form-data">
-        <fieldset class="wrap-form-admin d-flex flex-column m-2">
-            <legend>Información General</legend>
-
-            <label for="title">Title</label>
-            <input type="text" name="title" id="title_admin_create" value="<?php echo $title ?>">
-
-            <label for="description">Description</label>
-            <input type="text" name="description" id="description_admin_create" value="<?php echo $description ?>" />
-
-            <label for="services">Services</label>
-            <textarea name="services" id="" cols="30" rows="10"></textarea>
-
-
-            <label for="price">Price</label>
-            <input type="number" name="price" id="price" value="<?php echo $price ?>" />
-
-            <label for="image"></label>
-            <input type="file" id="image" accept="image/jpeg, image/png, image/webp" value="hola">
-
-            <input type="submit" value="Update" class="w-25 mt-2">
-
-
-        </fieldset>
+        <?php include '../../includes/templates/form.php' ?>
+        <input type="submit" value="Update" class="w-25 mt-2">
     </form>
 
 </main>

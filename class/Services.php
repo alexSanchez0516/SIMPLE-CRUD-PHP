@@ -122,6 +122,42 @@ class Services
     public function update(): void {
     }
 
-    public function delete(): void {
+    public static function delete($id): void {
+        echo "Eliminando";
+        exit;
     }
+
+    public static function all() : array {
+        $query = $query = "SELECT * FROM services";
+        $data = self::consulSQL($query);
+
+        return $data; //Return all data
+       
+    }
+
+    public static function consulSQL($query) : Array {
+        $data = self::$db->query($query);
+
+        $services = [];
+        
+        while ($record = $data->fetch_assoc()) {
+            $services[] = self::createObject($record);
+        }
+        $data->free(); //Liberar memoria
+
+        return $services; //return mapp array to object
+    }
+
+    protected static function createObject($record) { //objeto en memoria espejo de la db
+        $object = new self;
+
+        foreach ($record as $key => $value) {
+            if(property_exists($object, $key)) {
+                $object->$key = $value; //si existe ese objeto con esa clave
+            }
+        }
+        return $object; //return object
+
+    }
+
 }

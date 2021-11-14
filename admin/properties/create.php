@@ -12,7 +12,7 @@ isAuth();
 
 
 includeTemplate('header');
-
+$serviceInstace = new Services();
 $errors = Services::getErrors();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -67,27 +67,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <form action="/admin/properties/create.php" method="POST" id="form-admin" class="d-flex flex-column" enctype="multipart/form-data">
         <!-- PARA SUBIR IMAGES -->
-        <fieldset class="wrap-form-admin d-flex flex-column m-2">
-            <legend class="text-secondary">Información General</legend>
+        <?php include '../../includes/templates/form.php' ?>
+        <input type="submit" value="Crete" id="send" class=" w-25 mt-2">
 
-            <label class="text-secondary" for="title">Title</label>
-            <input class="validation" minlength=3 type="text" name="title" id="title_admin_create" required value="" />
-
-            <label class="text-secondary" for="description">Description</label>
-            <input type="text" minlength=3 class="validation" name="description" id="description_admin_create" required value="" />
-
-            <label class="text-secondary" for="services">Add Services</label>
-            <textarea name="services" minlength=3 id="" class="validation" cols="30" rows="10" required></textarea>
-
-            <label class="text-secondary" for="price">Price</label>
-            <input type="number" minlength=1 class="validation" name="price" id="price" required value="" />
-
-            <label class="text-secondary" for="image"></label>
-            <input type="file" id="image" name="image" accept="image/jpeg, image/png, image/webp">
-
-            <input type="submit" value="Crete" id="send" class=" w-25 mt-2">
-
-        </fieldset>
     </form>
 
 </main>
