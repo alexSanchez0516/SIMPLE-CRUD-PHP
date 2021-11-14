@@ -43,6 +43,7 @@ class Services
         unset($atributes['services']);
 
 
+
         $query = "INSERT INTO services (";
         $query .= join(', ', array_keys($atributes));
         $query .= " ) VALUES ('";
@@ -67,21 +68,18 @@ class Services
     }
 
     //Identificamos cual tenemos
-    public function mapAtributes(): array
-    {
+    public function mapAtributes(): array {
         $atributes = [];
 
         foreach (self::$colDB as $col) {
-            if ($col === 'id') continue;
-            if ($col === 'imageProduct') continue;
+            if ($col === 'id') continue;            
             //Atributes en la posicion de col se va a llenar con los valores de la instancia 
             $atributes[$col] = $this->$col;
         }
         return $atributes;
     }
 
-    public function sanitizeData(): array
-    {
+    public function sanitizeData(): array {
         $atributes = $this->mapAtributes();
         $sanitize = [];
 
@@ -98,13 +96,11 @@ class Services
     }
 
 
-    public static function getErrors(): array
-    {
+    public static function getErrors(): array {
         return self::$errors;
     }
 
-    public function validateData(): array
-    {
+    public function validateData(): array {
         if (!$this->name) {
             self::$errors[] = "Title is required";
         }
@@ -124,11 +120,9 @@ class Services
         return self::$errors;
     }
 
-    public function update(): void
-    {
+    public function update(): void {
     }
 
-    public function delete(): void
-    {
+    public function delete(): void {
     }
 }
