@@ -5,62 +5,51 @@ require 'errors.php';
 
 use App\Services;
 
-
+use Intervention\Image\ImageManagerStatic as Image;
 
 $db = connectDB();
-
-
 isAuth();
 
 
 includeTemplate('header');
 
-$title = "";
-$description = "";
-$price = "";
+$errors = Services::getErrors();
 
-$errors_file = [];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    ob_start();
 
-
-if (empty($errors_file)) {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-        /*
-        La función ob_start() sirve para indicarle a PHP que se ha de
-        iniciar el buffering de la salida, es decir, que debe empezar
-        a guardar la salida en un bufer interno, en vez de enviarla
-        al cliente.
-        */ 
-        ob_start();
+    $serviceInstace = new Services($_POST);
 
 
 
-        $folderImg = "../img/";
+    $image = $_FILES['image'];
+    $nameImage = md5(uniqid(rand(), true));
+    $extension = pathinfo($image['name'], PATHINFO_EXTENSION);
+    $completeImg = $nameImage . "." . $extension;
 
-        if (!is_dir($folderImg)) {
-            mkdir($folderImg);
+
+    if ($_FILES['image']['tmp_name']) {
+        $image = Image::make($_FILES['image']['tmp_name'])->fit(800, 600); //name and 
+        $serviceInstace->setImage($completeImg);
+    }
+    $errors = $serviceInstace->validateData();
+
+
+
+    if (empty($errors)) {
+
+        if (!is_dir(FOLDER_IMG)) {
+            mkdir(FOLDER_IMG);
         }
 
-        //Generate name for image
-        $image = $_FILES['image'];
-        $nameImage = md5(uniqid(rand(), true));
-        $extension = pathinfo($image['name'], PATHINFO_EXTENSION);
+        //upload img
+        $image->save(FOLDER_IMG . $completeImg);
 
-        move_uploaded_file($image['tmp_name'], $folderImg . $nameImage . "." . $extension);
+        $serviceInstace->save();
 
-        $completeImg = $nameImage . "." . $extension;
-
-
-        if (!$image['name']) {
-            $errors_file = ["DEBES SUBIR UNA FOTO"];
-        } else {
-            //debug($_POST);
-            $serviceInstace = new Services($_POST); 
-            exit;
-            $serviceInstace->save();
-        }
     }
 }
+
 
 
 
@@ -70,7 +59,7 @@ if (empty($errors_file)) {
     <button onclick="window.location.href='../' " type="button" class="btn btn-outline-info text-dark w-25 m-4" id="btn-return-create">Return</button>
     <h1 class="text-admin text-primary text-center m-4">Crear Servicio</h1>
 
-    <?php foreach ($errors_file as $e) : ?>
+    <?php foreach ($errors as $e) : ?>
         <div class="errors">
             <?php echo $e ?>
         </div>
@@ -82,16 +71,16 @@ if (empty($errors_file)) {
             <legend class="text-secondary">Información General</legend>
 
             <label class="text-secondary" for="title">Title</label>
-            <input class="validation" minlength=3 type="text" name="title" id="title_admin_create" required value="<?php echo $title ?>" />
+            <input class="validation" minlength=3 type="text" name="title" id="title_admin_create" required value="" />
 
             <label class="text-secondary" for="description">Description</label>
-            <input type="text" minlength=3 class="validation" name="description" id="description_admin_create" required value="<?php echo $description ?>" />
+            <input type="text" minlength=3 class="validation" name="description" id="description_admin_create" required value="" />
 
             <label class="text-secondary" for="services">Add Services</label>
             <textarea name="services" minlength=3 id="" class="validation" cols="30" rows="10" required></textarea>
 
             <label class="text-secondary" for="price">Price</label>
-            <input type="number" minlength=3 class="validation" name="price" id="price" required value="<?php echo $price ?>" />
+            <input type="number" minlength=1 class="validation" name="price" id="price" required value="" />
 
             <label class="text-secondary" for="image"></label>
             <input type="file" id="image" name="image" accept="image/jpeg, image/png, image/webp">
