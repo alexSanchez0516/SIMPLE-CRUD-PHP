@@ -6,7 +6,6 @@ namespace App;
 class Services
 {
 
-    //DB
     protected static $db;
     protected static $colDB = ['id', 'name', 'description', 'services', 'price', 'imageProduct'];
 
