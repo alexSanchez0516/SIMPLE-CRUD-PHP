@@ -13,7 +13,6 @@ $db = connectDB();
 isAuth();
 
 
-
 includeTemplate('header');
 
 $title = "";
@@ -34,10 +33,7 @@ if (empty($errors_file)) {
         */ 
         ob_start();
 
-        $serviceInstace = new Services($_POST); 
-        $serviceInstace->save();
 
-        exit;
 
         $folderImg = "../img/";
 
@@ -58,27 +54,10 @@ if (empty($errors_file)) {
         if (!$image['name']) {
             $errors_file = ["DEBES SUBIR UNA FOTO"];
         } else {
-
-
-            //services list separtors
-            $services = mysqli_real_escape_string($db, $_POST['services']);
-            $listServices = explode(",", $services);
-
-            //SELECT LAST ID
-            $query = "SELECT id FROM services ORDER BY id DESC";
-            $result = mysqli_query($db, $query);
-            $data = (mysqli_fetch_assoc($result));
-            $id = intval($data['id']);
-
-            for ($i = 0; $i < count($listServices); $i++) {
-
-                $query = "INSERT INTO service (serviceID, name) VALUES ($id, '${listServices[$i]}')";
-                $data = mysqli_query($db, $query);
-
-            }
-
-            //Mandar a 404
-             $data ? header('Location: /admin') : header('Location: /build/404.php');
+            //debug($_POST);
+            $serviceInstace = new Services($_POST); 
+            exit;
+            $serviceInstace->save();
         }
     }
 }

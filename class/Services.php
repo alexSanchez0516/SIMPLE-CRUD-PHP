@@ -15,6 +15,7 @@ class Services {
     public int $price;
     public String $imageProduct;
 
+    protected static $errores = [];
     
 
     public function __construct($args = [])
@@ -41,7 +42,7 @@ class Services {
         $query .= join("', '", array_values($atributes));
         $query .= "')";
 
-        $data = self::$db->query($query);
+        $data = self::$db->query($query) ? : header('Location: /');
 
         $query = "SELECT id FROM services ORDER BY id DESC";
         $results = self::$db->query($query);
@@ -54,8 +55,9 @@ class Services {
 
         foreach($listServices as $service) {
             $query = "INSERT INTO service (serviceID, name) VALUES ($id, '${service}')";
-            $data = self::$db->query($query);
+            $data = self::$db->query($query) ? : header('Location: /');
         }
+        header('Location: /admin');
         
     }
 
@@ -80,7 +82,10 @@ class Services {
         }
         return $sanitize;
     }
-    
-    
 
+    public static function getErrors() : Array {
+        return self::$errores;
+    } 
+    
+    
 }
