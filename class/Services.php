@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Intervention\Image\ImageManagerStatic as Image;
+
 
 class Services
 {
@@ -22,7 +24,7 @@ class Services
     public function __construct($args = [])
     {
         $this->id = $args['id'] ?? 0;
-        $this->name = $args['title'] ?? '';
+        $this->name = $args['name'] ?? '';
         $this->description = $args['description'] ?? '';
         $this->services = $args['services'] ?? '';
         $this->price = $args['price'] ?? 0;
@@ -34,7 +36,7 @@ class Services
         self::$db = $database;
     }
 
-    public function save()
+    public function create()
     {
 
         $atributes = $this->sanitizeData();
@@ -66,19 +68,70 @@ class Services
         header('Location: /admin');
     }
 
+    public function save()
+    {
+        if (($this->id) > 0) {
+            $this->update();
+        } else {
+            $this->create();
+        }
+    }
+
+    public function update() {
+
+        $atributes = $this->sanitizeData();
+        $services = $atributes['services'];
+        unset($atributes['services']);
+
+        foreach ($atributes as $key => $value) {
+            $values[] = "{$key}='{$value}'";
+        }
+        $query = " UPDATE services SET name = ";
+        $query .= join(', ', $values);
+        $query .= " WHERE id = " . self::$db->escape_string($this->id);
+        $query .= " LIMIT 1";
+
+        self::$db->query($query);
+
+        debug($query);
+
+
+        debug(join(', ', $values));
+
+        
+        debug($values);
+
+
+
+    }
+
+
     //Identificamos cual tenemos
-    public function mapAtributes(): array {
+    public function mapAtributes(): array
+    {
         $atributes = [];
 
         foreach (self::$colDB as $col) {
-            if ($col === 'id') continue;            
+            if ($col === 'id') continue;
             //Atributes en la posicion de col se va a llenar con los valores de la instancia 
             $atributes[$col] = $this->$col;
         }
         return $atributes;
     }
 
-    public function sanitizeData(): array {
+    //Sincroniza el objeto en memoria con  los nuevos cambios
+    public function synchronize($args = [])
+    {
+        foreach ($args as $key => $value) {
+            if (property_exists($this, $key) && !is_null($value)) {
+                $this->$key = $value;
+            }
+        }
+    }
+
+
+    public function sanitizeData(): array
+    {
         $atributes = $this->mapAtributes();
         $sanitize = [];
 
@@ -88,18 +141,40 @@ class Services
         return $sanitize;
     }
 
-    public function setImage($image): void {
+    public function setImage($image): void
+    {
         if ($image) {
             $this->imageProduct = $image;
         }
     }
 
+    public function uploadImg($image, $imgDelete)
+    {
+        $nameImage = md5(uniqid(rand(), true));
+        $extension = pathinfo($image['name'], PATHINFO_EXTENSION);
+        $completeImg = $nameImage . "." . $extension;
+        if (isset($imgDelete)) {
+            file_exists(FOLDER_IMG . $imgDelete) ? unlink(FOLDER_IMG . $imgDelete) : false;
+        }
 
-    public static function getErrors(): array {
+        $image = Image::make($image['tmp_name'])->fit(800, 600); //name and 
+        $this->setImage($completeImg);
+
+        if (!is_dir(FOLDER_IMG)) {
+            mkdir(FOLDER_IMG);
+        }
+
+        $image->save(FOLDER_IMG . $completeImg);
+    }
+
+
+    public static function getErrors(): array
+    {
         return self::$errors;
     }
 
-    public function validateData(): array {
+    public function validateData(): array
+    {
         if (!$this->name) {
             self::$errors[] = "Title is required";
         }
@@ -120,7 +195,8 @@ class Services
     }
 
 
-    public static function delete($idDelete): void {
+    public static function delete($idDelete): void
+    {
         $query = "SELECT imageProduct FROM services WHERE id = " . $idDelete;
         $data = self::$db->query($query)->fetch_assoc();
         debug($data);
@@ -128,30 +204,32 @@ class Services
 
         //$query = "DELETE FROM service WHERE serviceID = ${idDelete}";
         echo "Eliminando";
-
     }
 
-    public static function all() : array {
+    public static function all(): array
+    {
         $query = $query = "SELECT * FROM services";
         $data = self::consulSQL($query);
 
         return $data; //Return all data
-       
+
     }
 
-     public static function find($id) {
+    public static function find($id)
+    {
 
         $query = "SELECT * FROM services WHERE id = ${id}";
         $data = self::consulSQL($query);
 
         return array_shift($data); //Devuelve primer elemento de arreglo
-     }
+    }
 
-    public static function consulSQL($query) : Array {
+    public static function consulSQL($query): array
+    {
         $data = self::$db->query($query);
 
         $services = [];
-        
+
         while ($record = $data->fetch_assoc()) {
             $services[] = self::createObject($record);
         }
@@ -160,16 +238,16 @@ class Services
         return $services; //return mapp array to object
     }
 
-    protected static function createObject($record) { //objeto en memoria espejo de la db
+    protected static function createObject($record)
+    { //objeto en memoria espejo de la db
         $object = new self;
 
         foreach ($record as $key => $value) {
-            if(property_exists($object, $key)) {
+            if (property_exists($object, $key)) {
                 $object->$key = $value; //si existe ese objeto con esa clave
             }
         }
         return $object; //return object
 
     }
-
 }

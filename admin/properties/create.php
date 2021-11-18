@@ -7,7 +7,7 @@ use App\Services;
 
 use Intervention\Image\ImageManagerStatic as Image;
 
-$db = connectDB();
+$db = connectDB(); 
 isAuth();
 
 
@@ -20,30 +20,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $serviceInstace = new Services($_POST);
 
-
-
     $image = $_FILES['image'];
-    $nameImage = md5(uniqid(rand(), true));
-    $extension = pathinfo($image['name'], PATHINFO_EXTENSION);
-    $completeImg = $nameImage . "." . $extension;
+    $serviceInstace->uploadImg($image, null);
 
-
-    if ($_FILES['image']['tmp_name']) {
-        $image = Image::make($_FILES['image']['tmp_name'])->fit(800, 600); //name and 
-        $serviceInstace->setImage($completeImg);
-    }
     $errors = $serviceInstace->validateData();
 
-
-
     if (empty($errors)) {
-
-        if (!is_dir(FOLDER_IMG)) {
-            mkdir(FOLDER_IMG);
-        }
-
-        //upload img
-        $image->save(FOLDER_IMG . $completeImg);
 
         $serviceInstace->save();
 

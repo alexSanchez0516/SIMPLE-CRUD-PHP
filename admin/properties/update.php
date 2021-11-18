@@ -1,6 +1,8 @@
 <?php
 
 use App\Services;
+use Intervention\Image\ImageManagerStatic as Image;
+
 
 require '../../includes/app.php';
 
@@ -10,33 +12,43 @@ isAuth();
 
 
 
-$id = filter_var(intval($_GET['updateID']), FILTER_VALIDATE_INT) ? : header('Location: /');
+$id = filter_var(intval($_GET['updateID']), FILTER_VALIDATE_INT) ?: header('Location: /');
 
-$errors_file = [];
+$errors = Services::getErrors();
 $serviceInstace = Services::find($id);
- 
+$imgDelete = $serviceInstace->imageProduct;
 
 
+$args = [];
+//$serviceInstace->update();
 
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        ob_start();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    ob_start();
+    $args = [];
 
-        
+    $args['name'] = $_POST['name'] ?? null;
+    $args['description'] = $_POST['description'] ?? null;
+    $args['services'] = $_POST['services'] ?? null;
+    $args['price'] = $_POST['price'] ?? null;
+    $args['imageProduct'] = $_FILES['image']['name'] ?? null;
 
-        //Escapa de sql injection 
-        $title = mysqli_real_escape_string($db,  $_POST['title']);
-        $description = mysqli_real_escape_string($db, $_POST['description']);
-        $price = mysqli_real_escape_string($db, $_POST['price']);
+    $serviceInstace->synchronize($args);
 
-        $query = " UPDATE services SET name = '${title}', description = '${description}', price = ${price} WHERE id = ${id} ";
-
-
-        //Mandar a 404
-        $result = mysqli_query($db, $query) ? header("Location: /admin") : header('Location: /build/404.php');
+    $errors = $serviceInstace->validateData();
 
 
+    if (empty($errors)) {
+        $serviceInstace->uploadImg($_FILES['image'], $imgDelete);
+        $serviceInstace->save();
     }
+
+    //$query = " UPDATE services SET name = '${title}', description = '${description}', price = ${price} WHERE id = ${id} ";
+
+
+    //Mandar a 404
+    //$result = mysqli_query($db, $query) ? header("Location: /admin") : header('Location: /build/404.php');
+}
 
 
 
@@ -49,7 +61,7 @@ includeTemplate('header');
     <button onclick="window.location.href='../' " type="button" class="btn btn-outline-info text-dark w-25 m-4" id="btn-return-create">Return</button>
     <h1 class="text-admin text-primary text-center m-4">Actualizar Servicio</h1>
 
-    <?php foreach ($errors_file as $e) : ?>
+    <?php foreach ($errors as $e) : ?>
         <div class="errors">
             <?php echo $e ?>
         </div>
