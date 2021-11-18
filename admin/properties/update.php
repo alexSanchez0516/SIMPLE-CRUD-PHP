@@ -1,7 +1,9 @@
 <?php
 
-require '../../includes/funciones.php';
-require '../../includes/config/db.php';
+use App\Services;
+
+require '../../includes/app.php';
+
 
 $db = connectDB();
 isAuth();
@@ -11,11 +13,8 @@ isAuth();
 $id = filter_var(intval($_GET['updateID']), FILTER_VALIDATE_INT) ? : header('Location: /');
 
 
-
-$query = "SELECT * FROM services WHERE id = ${id}";
-$result = mysqli_query($db, $query);
-
-$data = mysqli_fetch_assoc($result);
+ $service = Services::find($id);
+ debug($service);
 
 
 

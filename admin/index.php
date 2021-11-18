@@ -14,10 +14,11 @@ $services = Services::all();
 //Delete
 if(isset($_GET["deleteID"])) {
 
-    $idDelete = filter_var(intval($_GET['deleteID']), FILTER_VALIDATE_INT ? : header('Location: /'));
+    $idDelete = filter_var(intval($_GET['deleteID']), FILTER_VALIDATE_INT ) ?  : header('Location: /?chistoso');
     
     Services::delete($idDelete);
 
+    exit;
     //Name photo 
     $query = "SELECT imageProduct FROM services WHERE id = ${idDelete}";
     $data = mysqli_query($db, $query);

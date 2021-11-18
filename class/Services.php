@@ -119,12 +119,16 @@ class Services
         return self::$errors;
     }
 
-    public function update(): void {
-    }
 
-    public static function delete($id): void {
+    public static function delete($idDelete): void {
+        $query = "SELECT imageProduct FROM services WHERE id = " . $idDelete;
+        $data = self::$db->query($query)->fetch_assoc();
+        debug($data);
+
+
+        //$query = "DELETE FROM service WHERE serviceID = ${idDelete}";
         echo "Eliminando";
-        exit;
+
     }
 
     public static function all() : array {
@@ -134,6 +138,14 @@ class Services
         return $data; //Return all data
        
     }
+
+     public static function find($id) {
+
+        $query = "SELECT * FROM services WHERE id = ${id}";
+        $data = self::consulSQL($query);
+
+        return array_shift($data); //Devuelve primer elemento de arreglo
+     }
 
     public static function consulSQL($query) : Array {
         $data = self::$db->query($query);
