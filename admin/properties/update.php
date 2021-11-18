@@ -12,21 +12,13 @@ isAuth();
 
 $id = filter_var(intval($_GET['updateID']), FILTER_VALIDATE_INT) ? : header('Location: /');
 
-
- $service = Services::find($id);
- debug($service);
-
-
-
-//update
-
-$title = $data['name'];
-$description = $data['description'];
-$price = $data['price'];
 $errors_file = [];
+$serviceInstace = Services::find($id);
+ 
 
 
-if (empty($errors_file)) {
+
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ob_start();
 
@@ -45,7 +37,7 @@ if (empty($errors_file)) {
 
 
     }
-}
+
 
 
 
