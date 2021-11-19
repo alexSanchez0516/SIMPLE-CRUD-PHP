@@ -57,6 +57,8 @@ CREATE TABLE `service` (
   PRIMARY KEY (`id`),
   KEY `fk_service` (`serviceID`),
   CONSTRAINT `fk_service` FOREIGN KEY (`serviceID`) REFERENCES `services` (`id`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
