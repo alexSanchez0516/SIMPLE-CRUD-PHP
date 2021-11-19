@@ -97,6 +97,8 @@ class Services
         self::$db->query($query) ?  : header('Location: /error.html');
         
 
+        //token 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
+
         //UPDATE SERVICE
         $listServices = explode(",", $services);
 
