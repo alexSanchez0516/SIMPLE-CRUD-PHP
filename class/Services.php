@@ -83,26 +83,19 @@ class Services
         $services = $atributes['services'];
         unset($atributes['services']);
 
+
         foreach ($atributes as $key => $value) {
             $values[] = "{$key}='{$value}'";
         }
-        $query = " UPDATE services SET name = ";
+        
+        $query = " UPDATE services SET ";
         $query .= join(', ', $values);
         $query .= " WHERE id = " . self::$db->escape_string($this->id);
         $query .= " LIMIT 1";
-
-        self::$db->query($query);
-
-        debug($query);
-
-
-        debug(join(', ', $values));
-
+        $result = self::$db->query($query) ? header('Location: /admin?state=2') : header('Location: /404.html');
         
-        debug($values);
 
-
-
+        //UPDATE SERVICE
     }
 
 
@@ -195,15 +188,15 @@ class Services
     }
 
 
-    public static function delete($idDelete): void
+    public function delete(): void
     {
-        $query = "SELECT imageProduct FROM services WHERE id = " . $idDelete;
-        $data = self::$db->query($query)->fetch_assoc();
-        debug($data);
+        //Services*******
+        $query = "DELETE FROM service WHERE serviceID = $this->id";
+        
+        file_exists(FOLDER_IMG . $this->imageProduct) ? unlink(FOLDER_IMG . $this->imageProduct) : false;
+        self::$db->query($query) ? header('Location: /admin?state=3') : header('Location: /404.html');
 
-
-        //$query = "DELETE FROM service WHERE serviceID = ${idDelete}";
-        echo "Eliminando";
+        
     }
 
     public static function all(): array

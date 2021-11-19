@@ -4,9 +4,17 @@ document.addEventListener('DOMContentLoaded', function() {
     darkMode();
     formCreateAdmin()
     showDetail();
+    messagesFlash();
 }); 
 
 
+
+function messagesFlash() {
+    const state = document.querySelector('.state');
+    setTimeout(() => {
+        state.remove();
+    }, 4000);
+}
 
 
 function showDetail() {

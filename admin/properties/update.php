@@ -43,11 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $serviceInstace->save();
     }
 
-    //$query = " UPDATE services SET name = '${title}', description = '${description}', price = ${price} WHERE id = ${id} ";
-
-
-    //Mandar a 404
-    //$result = mysqli_query($db, $query) ? header("Location: /admin") : header('Location: /build/404.php');
 }
 
 
