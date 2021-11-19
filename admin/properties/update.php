@@ -41,6 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($errors)) {
         $serviceInstace->uploadImg($_FILES['image'], $imgDelete);
         $serviceInstace->save();
+        
     }
 
 }

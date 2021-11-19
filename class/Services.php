@@ -39,10 +39,10 @@ class Services
     public function create()
     {
 
+
         $atributes = $this->sanitizeData();
         $services = $atributes['services'];
         unset($atributes['services']);
-
 
 
         $query = "INSERT INTO services (";
@@ -52,6 +52,8 @@ class Services
         $query .= "')";
 
         self::$db->query($query) ?: header('Location: /');
+
+        
 
         $query = "SELECT id FROM services ORDER BY id DESC";
         $results = self::$db->query($query);
@@ -63,9 +65,9 @@ class Services
 
         foreach ($listServices as $service) {
             $query = "INSERT INTO service (serviceID, name) VALUES ($id, '${service}')";
-            $data = self::$db->query($query) ?: header('Location: /');
+            self::$db->query($query) ?: header('Location: /');
         }
-        header('Location: /admin');
+        header('Location: /admin?state=1');
     }
 
     public function save()
@@ -92,10 +94,20 @@ class Services
         $query .= join(', ', $values);
         $query .= " WHERE id = " . self::$db->escape_string($this->id);
         $query .= " LIMIT 1";
-        $result = self::$db->query($query) ? header('Location: /admin?state=2') : header('Location: /404.html');
+        self::$db->query($query) ?  : header('Location: /error.html');
         
 
         //UPDATE SERVICE
+        $listServices = explode(",", $services);
+
+
+        foreach ($listServices as $service) {
+            //$query = "UPDATE service SET serviceID, name)VALUES ($this->id, '${service}')";
+            debug($query);
+            $data = self::$db->query($query) ;//?: header('Location: /error.html')
+            debug($data);
+        }
+        header('Location: /admin?state=1');
     }
 
 
@@ -190,13 +202,13 @@ class Services
 
     public function delete(): void
     {
-        //Services*******
-        $query = "DELETE FROM service WHERE serviceID = $this->id";
-        
-        file_exists(FOLDER_IMG . $this->imageProduct) ? unlink(FOLDER_IMG . $this->imageProduct) : false;
-        self::$db->query($query) ? header('Location: /admin?state=3') : header('Location: /404.html');
+        //Services all tables db
+        //Delete on cascade
+        $query = "DELETE FROM services WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
+        debug($query);
 
-        
+        file_exists(FOLDER_IMG . $this->imageProduct) ? unlink(FOLDER_IMG . $this->imageProduct) : false;
+        self::$db->query($query) ? header('Location: /admin?state=3') : header('Location: /404.html');        
     }
 
     public static function all(): array
