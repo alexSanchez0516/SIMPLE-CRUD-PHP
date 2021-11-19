@@ -20,7 +20,6 @@ $imgDelete = $serviceInstace->imageProduct;
 
 
 $args = [];
-//$serviceInstace->update();
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

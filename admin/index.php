@@ -19,28 +19,9 @@ if (isset($_GET["deleteID"])) {
     $ServiceInstance = Services::find($idDelete);
     $ServiceInstance->delete();
 
-    exit;
-    //Name photo 
-    $query = "SELECT imageProduct FROM services WHERE id = ${idDelete}";
-    $data = mysqli_query($db, $query);
-    $img = mysqli_fetch_assoc($data);
-
-
-    file_exists('img/' . $img["imageProduct"]) ? unlink('img/' . $img["imageProduct"]) : false;
-
-    $query = "DELETE FROM service WHERE serviceID =${idDelete}";
-    $data = mysqli_query($db, $query);
-
-    $query = "DELETE FROM services WHERE id = ${idDelete}";
-    $data = mysqli_query($db, $query);
 }
 
 
-
-
-/*MOSTRAR TODOS LOS SERVICIOS */
-$query = "SELECT * FROM services";
-$data = mysqli_query($db, $query);
 
 $state = null;
 if (isset($_GET['state'])) {

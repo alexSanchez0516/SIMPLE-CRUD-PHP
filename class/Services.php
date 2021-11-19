@@ -104,10 +104,8 @@ class Services
 
 
         foreach ($listServices as $service) {
-            //$query = "UPDATE service SET serviceID, name)VALUES ($this->id, '${service}')";
-            debug($query);
-            $data = self::$db->query($query) ;//?: header('Location: /error.html')
-            debug($data);
+            $query = "UPDATE service SET name = '${service}' WHERE serviceID = " . self::$db->escape_string($this->id);
+            self::$db->query($query) ?: header('Location: /error.html');
         }
         header('Location: /admin?state=1');
     }
@@ -207,7 +205,6 @@ class Services
         //Services all tables db
         //Delete on cascade
         $query = "DELETE FROM services WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
-        debug($query);
 
         file_exists(FOLDER_IMG . $this->imageProduct) ? unlink(FOLDER_IMG . $this->imageProduct) : false;
         self::$db->query($query) ? header('Location: /admin?state=3') : header('Location: /404.html');        
