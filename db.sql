@@ -68,7 +68,7 @@ CREATE TABLE `service` (
 
 LOCK TABLES `service` WRITE;
 /*!40000 ALTER TABLE `service` DISABLE KEYS */;
-INSERT INTO `service` VALUES (1,11,'Posicionamiento SEO'),(2,11,'Posicionamiento SEM'),(3,11,'Analítica e informes'),(4,11,'Optimizacion web'),(5,4,'Diseño Coporativo'),(6,4,'Diseño de Banner'),(7,4,'Diseño de Sliders'),(8,6,'Desarrollo de API'),(9,6,'Consumo de API'),(10,7,'Scrapping de sitios web'),(11,7,'Automatización de tareas'),(12,7,'Beautiful Soup'),(17,10,'Resolución de errores Wordpress'),(18,10,'Optimización de aplicaciones web'),(19,10,'Compresión de Imágenes'),(20,10,'Anti Hack y Anti Spam'),(21,10,'Actualizaciones web'),(27,47,'Desarrollo Backend'),(28,47,'Desarrollo Fronted'),(29,47,'Django/React'),(30,47,'PHP Master');
+INSERT INTO `service` VALUES (1,11,'Posicionamiento SEO, Posicionamiento SEM, Analítica e informes, Optimizacion web'),(5,4,'Diseño Coporativo, Diseño de Banner, Diseño de Sliders'),(8,6,'Desarrollo de API, Consumo de API'),(10,7,'Scrapping de sitios web, Automatización de tareas, Beautiful Soup'),(17,10,'Resolución de errores Wordpress, Optimización de aplicaciones web, Compresión de Imágenes, Anti Hack y Anti Spam, Actualizaciones web'),(27,47,'Desarrollo Backend, Desarrollo Fronted, Django/React, PHP Master');
 /*!40000 ALTER TABLE `service` ENABLE KEYS */;
 UNLOCK TABLES;
 

@@ -53,7 +53,7 @@ class Services
 
         self::$db->query($query) ?: header('Location: /');
 
-        
+
 
         $query = "SELECT id FROM services ORDER BY id DESC";
         $results = self::$db->query($query);
@@ -63,10 +63,9 @@ class Services
 
         $listServices = explode(",", $services);
 
-        foreach ($listServices as $service) {
-            $query = "INSERT INTO service (serviceID, name) VALUES ($id, '${service}')";
-            self::$db->query($query) ?: header('Location: /');
-        }
+        //$query = "INSERT INTO service (serviceID, name) VALUES ($id, '${service}')";
+        //self::$db->query($query) ?: header('Location: /');
+
         header('Location: /admin?state=1');
     }
 
@@ -79,7 +78,8 @@ class Services
         }
     }
 
-    public function update() {
+    public function update()
+    {
 
         $atributes = $this->sanitizeData();
         $services = $atributes['services'];
@@ -89,24 +89,25 @@ class Services
         foreach ($atributes as $key => $value) {
             $values[] = "{$key}='{$value}'";
         }
-        
+
         $query = " UPDATE services SET ";
         $query .= join(', ', $values);
         $query .= " WHERE id = " . self::$db->escape_string($this->id);
         $query .= " LIMIT 1";
-        self::$db->query($query) ?  : header('Location: /error.html');
-        
+        self::$db->query($query) ?: header('Location: /error.html');
+
 
         //token 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
 
         //UPDATE SERVICE
         $listServices = explode(",", $services);
+        debug($listServices);
 
+        //$query = "UPDATE service SET name = '${service}' WHERE serviceID = ";
+        $query .= self::$db->escape_string($this->id);
+        $query .= " LIMIT 1";
+        self::$db->query($query) ?: header('Location: /error.html');
 
-        foreach ($listServices as $service) {
-            $query = "UPDATE service SET name = '${service}' WHERE serviceID = " . self::$db->escape_string($this->id);
-            self::$db->query($query) ?: header('Location: /error.html');
-        }
         header('Location: /admin?state=1');
     }
 
@@ -192,7 +193,8 @@ class Services
         if (!$this->services) {
             self::$errors[] = "services list is required";
         }
-        if (!$this->imageProduct) {
+        if (!$this->imageProduct && $this->id == 0) {
+            //debug($this->id);
             self::$errors[] = "Photo is required";
         }
 
@@ -207,7 +209,7 @@ class Services
         $query = "DELETE FROM services WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
 
         file_exists(FOLDER_IMG . $this->imageProduct) ? unlink(FOLDER_IMG . $this->imageProduct) : false;
-        self::$db->query($query) ? header('Location: /admin?state=3') : header('Location: /404.html');        
+        self::$db->query($query) ? header('Location: /admin?state=3') : header('Location: /404.html');
     }
 
     public static function all(): array

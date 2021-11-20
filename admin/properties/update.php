@@ -12,7 +12,7 @@ isAuth();
 
 
 
-$id = filter_var(intval($_GET['updateID']), FILTER_VALIDATE_INT) ?: header('Location: /');
+$id = filter_var( intval($_GET['updateID']), FILTER_VALIDATE_INT) ?: header('Location: /');
 
 $errors = Services::getErrors();
 $serviceInstace = Services::find($id);
@@ -38,7 +38,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     if (empty($errors)) {
-        $serviceInstace->uploadImg($_FILES['image'], $imgDelete);
+        if (!empty($_FILES['image']['tmp_name'])) {
+            $serviceInstace->uploadImg($_FILES['image'], $imgDelete);
+        }
         $serviceInstace->save();
         
     }
