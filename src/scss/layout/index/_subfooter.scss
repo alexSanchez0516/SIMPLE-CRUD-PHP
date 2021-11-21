@@ -9,10 +9,9 @@
 
 
 .footer-content {
-    background-color: #007bff ;
+    background-color: $blueFooter;
 
     .wrap-sub-footer {
-        //background-color: #007bff ;
         display: flex;
         flex-flow: column wrap;
         width: 100%;
@@ -35,6 +34,11 @@
             &:nth-child(3n) {
                 @include desktop {
                     margin-bottom: 7rem;
+                }
+            }
+            #fix-title-box-sub-foter {
+                @include tablet {
+                    margin-right: 6rem !important;
                 }
             }
     

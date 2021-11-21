@@ -39,8 +39,9 @@
         @include tablet {
             width: 75%;
         }
-        padding: 2rem;
-        //border: 5px solid $blueContact !important;
+        @include tablet {
+            padding: 2rem;
+        }
 
 
 
@@ -50,15 +51,22 @@
             color: black;
         }
 
-        .subtitle-contact {
-            color: $redForte;
-        }
-    
-        
     
         .form-contact {
+
+            input[type="submit"] {
+                border: 1px solid #ccc;
+                border-radius:1em;
+                padding:.5rem;
+            }
+
+            
     
             * {
+                @include tablet {
+                    width: 50% !important;
+                }        
+                width: 75% !important;
                 font-family: Poppins;
                 background: transparent;
                 border: none;
@@ -71,6 +79,7 @@
             }
 
             .pol {
+                text-align: justify;
                 border: none ;
             }
             
@@ -80,6 +89,7 @@
 }
 
 #polict {
+    width: 4% !important;
     margin: 1rem;
 }
 

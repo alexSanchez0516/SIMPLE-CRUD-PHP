@@ -42,13 +42,16 @@
         width: 80%;
         justify-content: center;
 
+
         .package {
             display: flex;
             flex-flow: column wrap;
-            width: 80%;
+            width: 90%;
+
             
             .img-packs {
                 align-self: center;
+                margin-bottom: .5rem;
             }
             
             @include tablet {
@@ -70,14 +73,15 @@
             .title-package {
                 font-size: 1.6rem;
                 font-weight: bolder;
-                margin: 1.7rem 0 1rem 0;
+                //margin: 1.7rem 0 1rem 0;
                 color: $black;
                 text-align: center;
             }
+            #fix-pack {
+                margin-top: 1rem !important;
+            }
             .pack {
-                &:first-of-type {
-                    margin-top: 1rem;
-                }
+
                 display: flex;
                 flex-flow: column wrap;
                 border: 1px solid #ccc;

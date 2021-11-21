@@ -5,8 +5,16 @@ document.addEventListener('DOMContentLoaded', function() {
     formCreateAdmin()
     showDetail();
     messagesFlash();
+    changeColorBtn();
 }); 
 
+function changeColorBtn() {
+    const btn = document.querySelector('#change-color');
+    btn.addEventListener('mouseover', () => {
+        btn.classList.toggle('bg-primary');
+    });
+
+}
 
 
 function messagesFlash() {

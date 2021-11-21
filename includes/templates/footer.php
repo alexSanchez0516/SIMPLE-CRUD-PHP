@@ -2,7 +2,7 @@
 <footer class="footer-content d-flex flex-column justify-content-center m-2 w-100">
             <div class="wrap-sub-footer ">
                 <div class="box-sub-footer d-flex flex-column">
-                    <span class="title-box-sub-foter">
+                    <span class="title-box-sub-foter" id="fix-title-box-sub-foter">
                         Divisione
                     </span>
                     <p class="content-box-sub-footer">

@@ -83,8 +83,8 @@
 
 
 
-                    <div class="package">
-                    <img src="build/img/web-icon-code-2-1.webp" class="img-packs" loading="lazy">
+                    <div class="package" id="fix-responsive-package">
+                        <img src="build/img/web-icon-code-2-1.webp" class="img-packs" id="photo_fix_package" loading="lazy">
 
                         <h2 class="title-package ">Diseño de sitios web y estrategia de marca</h2>
                         <p class="description.package text-justify">   
@@ -112,7 +112,7 @@
                         
                         </p>
                         
-                        <div class="pack">
+                        <div class="pack" id="fix-pack">
                             <div class="content-service">
                                 <h3 class="title-pack">Diseño de logo</h3>
                                 <i class="fas fa-caret-down"></i>
@@ -210,14 +210,14 @@
                        Rediseñaremos tu web, adaptándonos a tu nuevos requerimientos. CRM-STORE-CRUD    
                     </p>
                     <ul class="d-flex flex-column">
-                        <li>Te diseñaremos una LandPage impresionante.</li>
-                        <li>Obtendras con un soporte 24/7 durante 1 mes.</li>
-                        <li>Diseño autogestionable.</li>
-                        <li>Optimizada para buscadores.</li>
-                        <li>Dominio, correo y alojamiento.</li>
-                        <li>Certificados de seguridad SSL.</li>
-                        <li>Redes Sociales</li>
-                        <li>LOPD y RGPD</li>
+                        <li class="list-unset">Te diseñaremos una LandPage impresionante.</li>
+                        <li class="list-unset">Obtendras con un soporte 24/7 durante 1 mes.</li>
+                        <li class="list-unset">Diseño autogestionable.</li>
+                        <li class="list-unset">Optimizada para buscadores.</li>
+                        <li class="list-unset">Dominio, correo y alojamiento.</li>
+                        <li class="list-unset">Certificados de seguridad SSL.</li>
+                        <li class="list-unset">Redes Sociales</li>
+                        <li class="list-unset">LOPD y RGPD</li>
                     </ul>
                 </div>
                 <img src="build/img/web-dev-25.webp" alt="service deluxe" loading="lazy">
@@ -231,23 +231,21 @@
                         Nos gusta trabajar con la ilusión de los nuevos proyectos, que transmitan confianza y profesionalidad desde un primer momento, capaces de vender y orientados a la consecución de los objetivos marcados por cada cliente.   
                     </p>
                     <ul class="d-flex flex-column">
-                        <li>Hasta 15 páginas/apartados.</li>
-                        <li>100% responsive.</li>
-                        <li>Web autogestionable.</li>
-                        <li>Diseño personalizado.</li>
-                        <li>conos Sociales.</li>
-                        <li>Multi idioma.</li>
-                        <li>Botón Whatsapp.</li>
-                        <li>Sección de noticias.</li>
-                        <li>30 Imágenes premium.</li>
-                        <li>Control de estadísticas.</li>
-                        <li>Tutoría y uso.</li>
-                        <li>Optimización buscadores.</li>
-                        <li>Cumplimiento RGPD y LOPD.</li>
-                        <li>Alta Google My Business</li>
-                        <li>Página de Facebook</li>
-                        <li>Página de Google Sites</li>
-                        <li>Soporte 24/7</li>
+                        <li class="list-unset">Hasta 15 páginas/apartados.</li>
+                        <li class="list-unset">100% responsive.</li>
+                        <li class="list-unset">Web autogestionable.</li>
+                        <li class="list-unset">Diseño personalizado.</li>
+                        <li class="list-unset">conos Sociales.</li>
+                        <li class="list-unset">Multi idioma.</li>
+                        <li class="list-unset">Botón Whatsapp.</li>
+                        <li class="list-unset">Sección de noticias.</li>
+                        <li class="list-unset">30 Imágenes premium.</li>
+                        <li class="list-unset">Control de estadísticas.</li>
+                        <li class="list-unset">Tutoría y uso.</li>
+                        <li class="list-unset">Optimización buscadores.</li>
+                        <li class="list-unset">Cumplimiento RGPD y LOPD.</li>
+                        <li class="list-unset">Página de Facebook</li>
+                        <li class="list-unset">Soporte 24/7</li>
                     </ul>
                 </div>
             </section>

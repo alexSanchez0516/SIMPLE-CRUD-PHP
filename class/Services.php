@@ -51,6 +51,7 @@ class Services
         $query .= join("', '", array_values($atributes));
         $query .= "')";
 
+
         self::$db->query($query) ?: header('Location: /');
 
 
@@ -61,8 +62,9 @@ class Services
         $id = filter_var(intval($record['MAX(id)']), FILTER_VALIDATE_INT) ?: header('Location: /') ;
 
 
-        $query = "INSERT INTO service (serviceID, name) VALUES ($id, '${services}')";
+        $query = "INSERT INTO service (serviceID, nameService) VALUES ($id, '${services}')";
         self::$db->query($query) ?: header('Location: /');
+
 
         header('Location: /admin?state=1');
     }
