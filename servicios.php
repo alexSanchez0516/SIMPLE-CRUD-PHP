@@ -4,12 +4,14 @@
 
 
     $db = connectDB();
-
-    //Show all services
-    $query = "SELECT id, name, imageProduct FROM services ORDER BY id DESC";
-    $data = mysqli_query($db, $query);
+    use App\Services;
 
 
+    $data = Services::consulSQL("SELECT * FROM services LEFT JOIN service ON service.serviceID = services.id; ");
+    $listServies = [];
+
+
+    //debug($data);
     includeTemplate('header');
 ?>
 
@@ -32,24 +34,21 @@
     <h2 class="text-info m-4 text-center text-uppercase">Servicios</h2>
         <div class="content-box d-flex flex-wrap m-4 justify-content-center">
 
-            <?php while ( $service = mysqli_fetch_assoc($data) ): ?>
+            <?php foreach ($data as $date): ?>
 
                 <div class="service-box m-4">
-                    <a class="m-2" href="service.php?id=<?php echo $service['id'] ?>"><img src="admin/img/<?php echo $service['imageProduct'] ?>" class="img-products" alt="Plan Desarrollo web" ></a>
-                    <a href="service.php?id=<?php echo $service['id'] ?>" class="m-2 title-services-box text-success"> <?php echo $service['name']?> </a>
-
-                    <!-- TABLA PIVOTE -->
-                    <?php
-                    $queryToServices = "SELECT name FROM service WHERE serviceID = ${service['id']}";
-                    $dataToServices = mysqli_query($db,$queryToServices);
+                    <a class="m-2" href="service.php?id=<?php echo $date->id ?>"><img src="admin/img/<?php echo $date->imageProduct ?>" class="img-products" alt="Plan Desarrollo web" ></a>
+                    <a href="service.php?id=<?php echo $date->id ?>" class="m-2 title-services-box text-success"> <?php echo $date->name ?> </a>                  
+                   
+                    <?php 
+                    $listServies = explode(",",$date->nameService);
                     ?>
 
-                    <?php while ( $services = mysqli_fetch_assoc($dataToServices) ): ?>
-                        <p class="mt-2 ml-4"> <?php echo $services['name'] ?> </p>
-                    <?php endwhile; ?>
-
+                    <?php foreach($listServies as $service):?>
+                        <p class="mt-2 ml-4"> <?php echo $service ?> </p>
+                    <?php endforeach; ?>
                 </div>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
                 
         </div>
     </section>

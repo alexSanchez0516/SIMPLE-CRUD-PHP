@@ -57,7 +57,6 @@ function formCreateAdmin() {
             
 
             if (item.length < 3 ) {
-                //Entro en la condición -->
 
                 
                 send.classList.toggle('no-send');

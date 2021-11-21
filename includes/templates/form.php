@@ -5,7 +5,7 @@
     <input class="validation" minlength=3 type="text" name="name" id="title_admin_create" placeholder="Titulo" required value="<?php echo s( $serviceInstace->name); ?>" />
 
     <label class="text-secondary" for="description">Description</label>
-    <input type="text" minlength=3 class="validation" name="description" id="description_admin_create" placeholder="Description" required value="<?php echo s( $serviceInstace->description ); ?>" />
+    <textarea minlength=3 class="validation" name="description" cols="30" rows="10" id="description_admin_create" placeholder="Description" required value="<?php echo s( $serviceInstace->description ); ?>"></textarea>
 
     <label class="text-secondary" for="services">Add Services</label>
     <textarea name="services" minlength=3 id="" class="validation" cols="30" rows="10" required></textarea>

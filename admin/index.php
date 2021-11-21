@@ -35,15 +35,15 @@ includeTemplate('header');
 
 <main class="wrap">
 
-    <?php if (intval($state) === 1) : ?>
+    <?php if (filter_var(intval($state), FILTER_VALIDATE_INT) === 1) : ?>
         <p class="text-success state text-center h4 m-2">
             Servicio creado correctamente
         </p>
-    <?php elseif (intval($state) === 2) : ?>
+    <?php elseif (filter_var(intval($state), FILTER_VALIDATE_INT)=== 2) : ?>
         <p class="text-success state text-center h4 m-2">
             Servicio actualizado correctamente
         </p>
-    <?php elseif (intval($state) === 3) : ?>
+    <?php elseif (filter_var(intval($state), FILTER_VALIDATE_INT) === 3) : ?>
         <p class="text-success state text-center h4 m-2">
             Servicio eliminado correctamente
         </p>

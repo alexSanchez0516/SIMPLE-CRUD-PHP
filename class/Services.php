@@ -54,17 +54,15 @@ class Services
         self::$db->query($query) ?: header('Location: /');
 
 
-
-        $query = "SELECT id FROM services ORDER BY id DESC";
+        $query = "SELECT MAX(id) FROM services";
         $results = self::$db->query($query);
 
-        $id = ($results->fetch_assoc());
-        $id = filter_var(intval($id['id']), FILTER_VALIDATE_INT) ?: header('Location: /');
+        $record = $results->fetch_assoc();
+        $id = filter_var(intval($record['MAX(id)']), FILTER_VALIDATE_INT) ?: header('Location: /') ;
 
-        $listServices = explode(",", $services);
 
-        //$query = "INSERT INTO service (serviceID, name) VALUES ($id, '${service}')";
-        //self::$db->query($query) ?: header('Location: /');
+        $query = "INSERT INTO service (serviceID, name) VALUES ($id, '${services}')";
+        self::$db->query($query) ?: header('Location: /');
 
         header('Location: /admin?state=1');
     }
@@ -83,7 +81,11 @@ class Services
 
         $atributes = $this->sanitizeData();
         $services = $atributes['services'];
+
         unset($atributes['services']);
+        if (empty($atributes['imageProduct'])) {
+            unset($atributes['imageProduct']);
+        }
 
 
         foreach ($atributes as $key => $value) {
@@ -99,11 +101,7 @@ class Services
 
         //token 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
 
-        //UPDATE SERVICE
-        $listServices = explode(",", $services);
-        debug($listServices);
-
-        //$query = "UPDATE service SET name = '${service}' WHERE serviceID = ";
+        $query = "UPDATE service SET name = '${services}' WHERE serviceID = ";
         $query .= self::$db->escape_string($this->id);
         $query .= " LIMIT 1";
         self::$db->query($query) ?: header('Location: /error.html');
@@ -251,6 +249,8 @@ class Services
         foreach ($record as $key => $value) {
             if (property_exists($object, $key)) {
                 $object->$key = $value; //si existe ese objeto con esa clave
+            }  else if ($key == 'nameService') {
+                $object->$key = $value;
             }
         }
         return $object; //return object
