@@ -27,14 +27,20 @@
  
  
  function imagenes () {
+    const options = {
+        optimizationLevel: 3
+    }
      return src(paths.imagenes)
-         .pipe( imagemin() )
+         .pipe( imagemin(options) )
          .pipe( dest('./build/img') );
  }
  
  function versionWebp() {
+    const options = {
+        quality: 50
+    };
      return src(paths.imagenes)
-         .pipe( webp() )
+         .pipe( webp(options) )
          .pipe( dest('./build/img') );
  }
  
