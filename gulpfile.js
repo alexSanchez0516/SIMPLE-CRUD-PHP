@@ -8,7 +8,11 @@
  const gulp = require('gulp');
  const webp = require('gulp-webp');
  const concat = require('gulp-concat');
- 
+ const sourcemaps = require('gulp-sourcemaps');
+ const plumber = require('gulp-plumber');
+ const terser = require('gulp-terser-js');
+
+
  //utilities css
  
  const autoprefixer = require('autoprefixer');
@@ -45,25 +49,51 @@
  }
  
  
+
+ /*
  function javascript() {
      return src(paths.js)
          .pipe( concat('bundle.js') )
          .pipe( dest('./build/js') )
  }
  
+ */
+ function javascript( done ) {
+    src('src/js/**/*.js')
+        .pipe(sourcemaps.init())
+        .pipe( terser() )
+        .pipe(sourcemaps.write('.'))
+        .pipe(dest('build/js'));
+
+    done();
+}
  
  
+ /*
  function compilarSASS() {
      //busca archivo, convierte y deja en memoria y luego almacena en disco
      return src(paths.scss) //Ubica el fichero scss
+     .pipe(sourcemaps.init())
+     .pipe( plumber())
      .pipe( sass({
-         outputStyle: "expanded" //compressed expanded
+         outputStyle: "compressed" //compressed expanded
      }) ) //convierte a sass
      .pipe( postcss( [ autoprefixer(), cssnano() ] ))
+     .pipe(sourcemaps.write('.'))
      .pipe( dest("./build/css") ); //Crea capeta y archivo --exporta
  
  }
- 
+ */
+ function compilarSASS( done ) {
+    src('src/scss/**/*.scss') // Identificar el archivo .SCSS a compilar
+        .pipe(sourcemaps.init())
+        .pipe( plumber())
+        .pipe( sass() ) // Compilarlo
+        .pipe( postcss([ autoprefixer(), cssnano() ]) )
+        .pipe(sourcemaps.write('.'))
+        .pipe( dest('build/css') ) // Almacenarla en el disco duro
+    done();
+}
  
  
  
