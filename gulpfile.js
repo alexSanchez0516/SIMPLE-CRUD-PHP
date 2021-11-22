@@ -48,16 +48,7 @@
          .pipe( dest('./build/img') );
  }
  
- 
 
- /*
- function javascript() {
-     return src(paths.js)
-         .pipe( concat('bundle.js') )
-         .pipe( dest('./build/js') )
- }
- 
- */
  function javascript( done ) {
     src('src/js/**/*.js')
         .pipe(sourcemaps.init())
@@ -68,22 +59,7 @@
     done();
 }
  
- 
- /*
- function compilarSASS() {
-     //busca archivo, convierte y deja en memoria y luego almacena en disco
-     return src(paths.scss) //Ubica el fichero scss
-     .pipe(sourcemaps.init())
-     .pipe( plumber())
-     .pipe( sass({
-         outputStyle: "compressed" //compressed expanded
-     }) ) //convierte a sass
-     .pipe( postcss( [ autoprefixer(), cssnano() ] ))
-     .pipe(sourcemaps.write('.'))
-     .pipe( dest("./build/css") ); //Crea capeta y archivo --exporta
- 
- }
- */
+
  function compilarSASS( done ) {
     src('src/scss/**/*.scss') // Identificar el archivo .SCSS a compilar
         .pipe(sourcemaps.init())
