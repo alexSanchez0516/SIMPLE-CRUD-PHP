@@ -9,10 +9,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function messagesFlash() {
-    const state = document.querySelector('.state');
-    setTimeout(() => {
-        state.remove();
-    }, 4000);
+    if (document.querySelector('.state')) {
+        const state = document.querySelector('.state');
+        setTimeout(() => {
+            state.remove();
+        }, 4000);
+    }
+    
 }
 
 
@@ -89,7 +92,8 @@ function showAlert(type, message, child, parent){
 
     setTimeout(() => {
         child.remove();
-    }, 3000);
+    }, 1000);
+
 
 }
 

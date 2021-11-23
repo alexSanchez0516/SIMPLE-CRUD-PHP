@@ -44,6 +44,8 @@
                     <a  href="/contact.php">Contacto</a>
 
                     <?php if($auth): ?>
+                        <a href="/admin">Panel Administración</a>
+                        <a  href="/">Crear cuenta</a>
                         <a  href="/close_sesion.php">Cerrar sesión</a>
                     <?php endif; ?>
                     

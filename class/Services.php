@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App;
 
@@ -156,7 +156,7 @@ class Services
 
     public function uploadImg($image, $imgDelete)
     {
-        $nameImage = md5(uniqid(rand(), true));
+        $nameImage = (int) md5(uniqid( rand(), true)); //quita casting
         $extension = pathinfo($image['name'], PATHINFO_EXTENSION);
         $completeImg = $nameImage . "." . $extension;
         if (isset($imgDelete)) {

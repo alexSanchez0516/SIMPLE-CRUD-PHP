@@ -226,7 +226,6 @@
                 <img src="build/img/web-dev-10.webp" loading="lazy" alt="Website Design Package" class="img-fluid w-100">
                 <div class="content-deluxe d-flex flex-column m-4 w-100">
                     <span class="title-deluxe">Desarrollo web</span>
-                    <h2 class="name-service-deluxe">Paquete de diseño web</h2>
                     <p class="desciption-content">
                         Nos gusta trabajar con la ilusión de los nuevos proyectos, que transmitan confianza y profesionalidad desde un primer momento, capaces de vender y orientados a la consecución de los objetivos marcados por cada cliente.   
                     </p>
