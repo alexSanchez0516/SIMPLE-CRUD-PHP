@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'c690103642bbab4573abae804ac8e3f091ac95f2',
+        'reference' => 'e46ecfa8d6aaec1ea7121bd151679f09adaa241b',
         'name' => 'alexandersanchez/divisione.es',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'c690103642bbab4573abae804ac8e3f091ac95f2',
+            'reference' => 'e46ecfa8d6aaec1ea7121bd151679f09adaa241b',
             'dev_requirement' => false,
         ),
         'guzzlehttp/psr7' => array(

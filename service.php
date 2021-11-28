@@ -2,6 +2,8 @@
     require 'includes/app.php';
     includeTemplate('header');
 
+    use App\Services;
+
 
     if (empty($_GET)) {
         header('Location: /');
@@ -10,9 +12,11 @@
         $db = connectDB(); 
         $id = filter_var(intval($_GET['id']), FILTER_VALIDATE_INT);
 
-        $query = "SELECT name, description  FROM services WHERE id = ${id}";
-        $data = mysqli_query($db, $query);
-
+        $query = "SELECT * FROM";
+        $query .= " services LEFT JOIN service ON service.serviceID = services.id WHERE services.id = $id ";
+        $service = Services::consulSQL($query);
+        $service = array_shift($service);
+        $listServices = explode(",", $service->nameService);
  
     }
 
@@ -31,31 +35,28 @@
 
 
         <section class="service-box-wrap">
-            <?php while ( $service = mysqli_fetch_assoc($data) ): ?>
+            
 
             <h2 class="title-box-wrap text-center m-4">
-                <?php echo $service['name'] ?>
+                <?php echo $service->name ?>
             </h2>
 
             <p class="sumary-box-product-wrap">
-                <?php echo $service['description'] ?>
+                <?php echo $service->description ?>
             </p>
 
             <ul class="list-product-wrap">
-                <h3 class="text-primary m-4 h5 ">¿QUÉ SOMOS CAPACES DE HACER</h3>
+                <h3 class="text-primary m-4 h5 ">¿QUÉ SOMOS CAPACES DE HACER?</h3>
 
-                <?php 
-                $queryForServices = "SELECT name FROM service WHERE serviceID = ${id}";
-                $dataForServices = mysqli_query($db, $queryForServices);
-                ?>
+               
+                <?php foreach ($listServices as $service): ?>
+               
+                    <li class="m-2"><?php echo $service ?></li>
 
-                <?php while( $services = mysqli_fetch_assoc($dataForServices)): ?>
-                <li class="m-2"><?php echo $services['name'] ?></li>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
 
             </ul>
 
-            <?php endwhile; ?>
         </section>
 
         <section class="contact-foot">

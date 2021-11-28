@@ -96,7 +96,7 @@
 
                         
 
-                        Logotipo y/o mascota corporativa.
+                        Logotipo.
                         Tarjetas de visita.
                         Vídeo promocional.
                         Rediseño de marca.

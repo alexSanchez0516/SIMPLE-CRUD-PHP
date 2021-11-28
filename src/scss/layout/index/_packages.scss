@@ -73,12 +73,13 @@
             .title-package {
                 font-size: 1.6rem;
                 font-weight: bolder;
-                //margin: 1.7rem 0 1rem 0;
                 color: $black;
                 text-align: center;
             }
             #fix-pack {
-                margin-top: 1rem !important;
+                @include tablet {
+                    margin-top: 3rem !important;
+                } 
             }
             .pack {
 

@@ -15,7 +15,7 @@ isAuth();
 $id = filter_var( intval($_GET['updateID']), FILTER_VALIDATE_INT) ?: header('Location: /');
 
 $errors = Services::getErrors();
-$serviceInstace = Services::find($id);
+$serviceInstace = Services::find($id, null);
 $imgDelete = $serviceInstace->imageProduct;
 
 

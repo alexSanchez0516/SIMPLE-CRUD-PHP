@@ -1,51 +1,21 @@
-<?php 
+<?php
 
-    require 'includes/app.php';
+use App\Users;
 
-    $db = connectDB();
+require 'includes/app.php';
 
-    $errors = [];
+$db = connectDB();
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+$errors = [];
 
+$user_login = new Users();
 
-        $user = mysqli_real_escape_string($db, trim($_POST['user'])); 
-        $password = mysqli_real_escape_string($db, trim($_POST['password']));
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        if (!$user || !$password) {
-            $errors[] = "Completa correctamente el formulario";
-        }
-
-        if (empty($errors)) {
-
-            $query = "SELECT * FROM users WHERE username = '$user'";
-            $data = mysqli_query($db, $query);
-
-            if ($data -> num_rows) {
-                $userVal = mysqli_fetch_assoc($data);
-
-                //revisar si el password es correcto
-                $auth = password_verify($password, $userVal['password']);
-                
-                if ($auth) {
-                    session_start();
-
-                    $_SESSION['username'] = $user;
-                    $_SESSION['login'] = true;
-
-                    
-                    header('Location: admin/');
-                } else {
-                    $errors[] = "Credenciales erróneas";
-                }
-
-            } else {
-                $errors[] = "El usuario no existe";
-            }
-
+    $user_login = new Users($_POST);
+    $user_login->login();
+    $errors[] = $user_login->getErrors();
         
-        }
-
     }
 
 ?>
@@ -73,7 +43,7 @@
             <img src="build/img/Divisione.webp" id="img-login" alt="Logotipo">
             <h1 class="text-info text-decoration-underline mb-4">Divisione.es</h1>
 
-            <?php foreach ($errors as $error): ?>
+            <?php foreach (array_shift($errors) as $error): ?>
                 <div class="errors mb-2">
                     <?php echo $error ?>
                 </div>
@@ -81,7 +51,7 @@
                 
             <form method="POST" id="form-login">
                 <legend class="text-center text-info" id="legend-login">Control de Acceso</legend>
-                <input type="text" name="user" id="user" placeholder="Usuario" required>
+                <input type="text" name="username" id="user" placeholder="Usuario" required>
                 <input type="password" name="password" id="password" placeholder="Password" required>
                 <input type="submit" class="btn btn-primary" value="Ingresar">
             </form>

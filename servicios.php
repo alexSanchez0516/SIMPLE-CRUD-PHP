@@ -7,11 +7,9 @@
     use App\Services;
 
 
-    $data = Services::consulSQL("SELECT * FROM services LEFT JOIN service ON service.serviceID = services.id; ");
+    $data = Services::consulSQL("SELECT services.id, name, imageProduct, description, service.nameService FROM services LEFT JOIN service ON services.id = service.serviceID; ");
     $listServies = [];
 
-
-    //debug($data);
     includeTemplate('header');
 ?>
 

@@ -16,7 +16,7 @@ $services = Services::all();
 if (isset($_GET["deleteID"])) {
 
     $idDelete = filter_var(intval($_GET['deleteID']), FILTER_VALIDATE_INT) ?: header('Location: /?chistoso');
-    $ServiceInstance = Services::find($idDelete);
+    $ServiceInstance = Services::find($idDelete, null);
     $ServiceInstance->delete();
 
 }
