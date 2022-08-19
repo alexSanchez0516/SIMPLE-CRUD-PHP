@@ -4,8 +4,8 @@
     $db = connectDB();
 
     $user = 'admin';
-    $password = "1690001299Gr.";
-    $email = "alexandervillegas0516@gmail.com";
+    $password = ".";
+    $email = "";
 
     $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
